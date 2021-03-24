@@ -1,0 +1,66 @@
+
+<div *ngIf="ciudades.length == 0; else esFalso">
+    <h1>No hay paises :( ERROR 404</h1>
+</div>
+ <ng-template #esFalso>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Ciudad</th>
+        <th scope="col">Pais</th>
+        <th scope="col">Codigo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ciudad of ciudades let i = index let impar = odd let par = even"[ngClass]="{azul:par,verde:impar}" on-click="mostrarClima(i)" >
+        <th scope="row">{{i+1}}</th>
+        <td>{{ciudad.nombre}}</td>
+        <td>{{ciudad.pais}}</td>
+        <td>{{ciudad.codigo}}</td>
+      </tr>
+    </tbody>
+</table>
+    </ng-template> 
+    <form>
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <label for="inputEmail4">Ciudad</label>
+            <input type="text" class="form-control" id="inputEmail4" placeholder="Ciudad" #ciudad>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputPassword4">Pais</label>
+            <input type="text" class="form-control" id="inputPassword4" placeholder="Pais" #pais>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputPassword4">Temperatura</label>
+            <input type="number" class="form-control" id="inputPassword4" placeholder="temperatura" #temperatura>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputPassword4">Viento</label>
+            <input type="number" class="form-control" id="inputPassword4" placeholder="Viento" #viento>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputPassword4">Precipitaciones</label>
+            <input type="number" class="form-control" id="inputPassword4" placeholder="Precipitaciones" #precipitaciones>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputAddress">Codigo Aeropuerto</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="Codigo Aeropuerto" #codigo>
+        </div>
+        <button on-click="enviar(ciudad.value,pais.value,codigo.value,precipitaciones.valueAsNumber,temperatura.valueAsNumber,viento.valueAsNumber)" type="button" class="btn btn-primary">Crear pais</button>
+      </form>
+      
+      <div class="card text-white bg-primary mb-3" style="max-width: 18rem; margin: 50px;">
+        <div  class="card-header">{{ciudades[i].nombre}}</div>
+        
+        <div id="vient" class="card-body">
+          <div  class="card-title">Pais: {{ciudades[i].pais}}</div>
+          <div class="card-title">Codigo: {{ciudades[i].codigo}}</div>
+          <div class="card-title">Precipitaciones: {{ciudades[i].clima.precipitaciones | percent}}</div>
+          <div  class="card-title">Temperatura: {{ciudades[i].clima.temperatura}}</div>
+          <div class="card-title">Viento: {{ciudades[i].clima.viento}}</div>
+          
+        </div>
+      </div>
